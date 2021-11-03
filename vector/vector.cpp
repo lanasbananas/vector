@@ -58,10 +58,65 @@ public:
 		};
 		return (*this);
 	};
-};
 
-int main()
-{
+	vector operator+(const vector& v1) //сложение
+	{
+		if (_size != v1._size)
+			throw("Can not sum2 vector!");
+		vector sum;
+		sum._size = _size;
+		sum._data = new double[_size];
+		for (int i = 0; i < _size; i++)
+		{
+			sum._data[i] = _data[i] + v1._data[i];
+		};
+		return sum;
+	};
 
-	return 0;
+	vector operator-(const vector& v1) //вычитание
+	{
+		if (_size != v1._size)
+			throw "Can not dif2 vector!";
+		vector dif;
+		dif._size = _size;
+		for (int i = 0; i < _size; i++)
+		{
+			dif._data[i] = _data[i] - v1._data[i];
+		};
+		return dif;
+	};
+	
+	double operator*(const vector& v1) //скалярное произведение
+	{
+		if (_size != v1._size)
+			throw "Can not mul2 vector!";
+		double mul = 0;
+		for (size_t i = 0; i < _size; i++)
+		{
+			mul += _data[i] * v1._data[i];
+		};
+		return mul;
+	};
+	
+	vector operator*(const double data)
+	{
+		vector res(_size, 0);
+		for (size_t i = 0; i < _size; i++)
+		{
+			res._data[i] = _data[i] * data;
+		};
+		return res;
+	};
+
+	vector operator/(const double data)
+	{
+		if (data == 0)
+			throw("Error!");
+		vector res(_size, 0);
+		for (size_t i = 0; i < _size; i++)
+		{
+			res._data[i] = _data[i] / data;
+		};
+		return res;
+	};
 }
